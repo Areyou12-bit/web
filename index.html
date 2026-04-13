@@ -1,725 +1,3051 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProTrader Academy - Maîtrise les Marchés</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-   
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clarity Visuals — Agence de Montage Vertical</title>
+
+  <!-- ═══════════════════════════════════════════
+       CDN DEPENDENCIES
+  ═══════════════════════════════════════════ -->
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- AOS — Animate On Scroll -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════
+       VARIABLES CSS — Modifiez ici pour changer le thème global
+    ═══════════════════════════════════════════════════════════ */
+    :root {
+      /* Couleurs principales */
+      --color-bg:          #0a0a0a;
+      --color-bg-2:        #0f0f0f;
+      --color-bg-3:        #111111;
+      --color-surface:     rgba(255, 255, 255, 0.03);
+      --color-surface-2:   rgba(255, 255, 255, 0.06);
+
+      /* Accents */
+      --color-emerald:     #10b981;
+      --color-emerald-l:   #34d399;
+      --color-emerald-d:   #059669;
+      --color-emerald-glow:rgba(16, 185, 129, 0.35);
+      --color-neon:        #00ff88;
+
+      /* Texte */
+      --color-text:        #f0f0f0;
+      --color-text-muted:  rgba(240, 240, 240, 0.45);
+      --color-text-faint:  rgba(240, 240, 240, 0.18);
+
+      /* Bordures */
+      --color-border:      rgba(255, 255, 255, 0.07);
+      --color-border-em:   rgba(16, 185, 129, 0.35);
+
+      /* Typographie */
+      --font-body:         'Inter', sans-serif;
+      --font-display:      'Space Grotesk', sans-serif;
+
+      /* Spacing */
+      --section-pad:       clamp(5rem, 10vw, 9rem);
+      --container-w:       1200px;
+      --radius-card:       1.25rem;
+      --radius-btn:        3rem;
+
+      /* Transitions */
+      --transition:        all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-fast:   all 0.2s ease;
+    }
+
+    /* ═══════════════════════
+       RESET & BASE
+    ═══════════════════════ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar custom */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--color-bg); }
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-emerald);
+      border-radius: 2px;
+    }
+
+    /* Sélection de texte */
+    ::selection {
+      background: var(--color-emerald-glow);
+      color: var(--color-emerald-l);
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { cursor: pointer; font-family: inherit; border: none; }
+    input, textarea, select { font-family: inherit; }
+
+    /* ═══════════════════════
+       UTILITAIRES
+    ═══════════════════════ */
+    .container {
+      width: min(var(--container-w), 100% - 2.5rem);
+      margin-inline: auto;
+    }
+
+    .section {
+      padding-block: var(--section-pad);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Badge label */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid var(--color-border-em);
+      color: var(--color-emerald-l);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .badge .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--color-emerald);
+      animation: pulse-dot 2s ease infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    /* Section headings */
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--color-text);
+      margin-bottom: 1rem;
+    }
+
+    .section-title span {
+      color: var(--color-emerald);
+      position: relative;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+      max-width: 560px;
+      margin-inline: auto;
+      line-height: 1.75;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: clamp(3rem, 6vw, 5rem);
+    }
+
+    /* Glass card base */
+    .glass {
+      background: var(--color-surface);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+    }
+
+    /* Gradient text */
+    .grad-text {
+      background: linear-gradient(135deg, var(--color-emerald-l), var(--color-neon));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Glow line séparateur */
+    .glow-line {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, var(--color-emerald), transparent);
+      border-radius: 1px;
+      margin: 1rem auto 0;
+    }
+
+    /* ═══════════════════════
+       NOISE OVERLAY
+    ═══════════════════════ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.018;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ═══════════════════════
+       GRID BACKGROUND
+    ═══════════════════════ */
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(16,185,129,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16,185,129,0.04) 1px, transparent 1px);
+      background-size: 64px 64px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ═══════════════════════
+       ORB DECORATIONS
+    ═══════════════════════ */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+    }
+
+    /* ═══════════════════════════════════════════════
+       HEADER / NAVBAR
+    ═══════════════════════════════════════════════ */
+    #header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1.1rem 0;
+      transition: var(--transition);
+    }
+
+    #header.scrolled {
+      background: rgba(10, 10, 10, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 0.8rem 0;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-icon {
+      width: 34px; height: 34px;
+      background: rgba(16,185,129,0.15);
+      border: 1px solid var(--color-border-em);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      color: var(--color-emerald);
+      font-size: 0.8rem;
+      transition: var(--transition);
+    }
+
+    .logo:hover .logo-icon {
+      background: rgba(16,185,129,0.25);
+      box-shadow: 0 0 16px var(--color-emerald-glow);
+    }
+
+    .logo span { color: var(--color-emerald); }
+
+    /* Nav links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      position: relative;
+      transition: var(--transition-fast);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--color-emerald);
+      transition: var(--transition-fast);
+      border-radius: 1px;
+    }
+
+    .nav-links a:hover { color: var(--color-text); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* CTA button */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.4rem;
+      background: var(--color-emerald);
+      color: #000;
+      font-size: 0.875rem;
+      font-weight: 700;
+      border-radius: var(--radius-btn);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--color-emerald-l), var(--color-emerald));
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 28px var(--color-emerald-glow), 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-primary span, .btn-primary i { position: relative; z-index: 1; }
+
+    /* Secondary button */
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1.75rem;
+      background: transparent;
+      color: var(--color-text);
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: var(--radius-btn);
+      border: 1px solid var(--color-border);
+      transition: var(--transition);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(16,185,129,0.4);
+      background: rgba(16,185,129,0.06);
+      color: var(--color-emerald-l);
+    }
+
+    /* Hamburger menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      padding: 6px;
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--color-text-muted);
+      border-radius: 2px;
+      transition: var(--transition-fast);
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      top: 65px;
+      background: rgba(10,10,10,0.97);
+      backdrop-filter: blur(24px);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+
+    .mobile-nav.open { display: flex; }
+
+    .mobile-nav a {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      transition: var(--transition-fast);
+    }
+
+    .mobile-nav a:hover { color: var(--color-emerald); }
+
+    /* ═══════════════════════════════════════════════
+       HERO SECTION
+    ═══════════════════════════════════════════════ */
+    #hero {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding-top: 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Orb decorations hero */
+    #hero .orb-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%);
+      top: -100px; left: -150px;
+    }
+
+    #hero .orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(0,255,136,0.06) 0%, transparent 70%);
+      bottom: 0; right: -80px;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    /* Hero text */
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-emerald);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px; height: 1.5px;
+      background: var(--color-emerald);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title .line { display: block; overflow: hidden; }
+
+    .hero-title .line-em {
+      color: var(--color-emerald);
+      position: relative;
+    }
+
+    /* Typing cursor */
+    .typing-cursor {
+      display: inline-block;
+      width: 3px;
+      height: 0.9em;
+      background: var(--color-emerald);
+      margin-left: 2px;
+      vertical-align: middle;
+      border-radius: 1px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--color-text-muted);
+      line-height: 1.8;
+      max-width: 500px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-desc strong {
+      color: var(--color-emerald-l);
+      font-weight: 600;
+    }
+
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Large CTA button for hero */
+    .btn-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 1rem 2rem;
+      background: var(--color-emerald);
+      color: #000;
+      font-size: 0.95rem;
+      font-weight: 800;
+      border-radius: var(--radius-btn);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      letter-spacing: -0.01em;
+    }
+
+    .btn-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .btn-hero:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow:
+        0 0 0 4px rgba(16,185,129,0.15),
+        0 0 40px rgba(16,185,129,0.45),
+        0 12px 40px rgba(0,0,0,0.4);
+    }
+
+    .btn-hero:hover::after { opacity: 1; }
+
+    /* Stats row */
+    .hero-stats {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      margin-top: 3.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .stat { text-align: left; }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--color-emerald);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--color-text-faint);
+      margin-top: 0.25rem;
+      letter-spacing: 0.04em;
+    }
+
+    .stat-divider {
+      width: 1px; height: 40px;
+      background: var(--color-border);
+    }
+
+    /* Hero visual — phone mockup */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .phone-wrapper {
+      position: relative;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-16px); }
+    }
+
+    .phone-frame {
+      width: 220px;
+      aspect-ratio: 9 / 16;
+      background: var(--color-surface);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: 2.5rem;
+      overflow: hidden;
+      position: relative;
+      box-shadow:
+        0 0 0 6px rgba(255,255,255,0.03),
+        0 30px 80px rgba(0,0,0,0.6),
+        0 0 60px rgba(16,185,129,0.12);
+    }
+
+    .phone-notch {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px; height: 20px;
+      background: #000;
+      border-radius: 100px;
+      z-index: 10;
+    }
+
+    .phone-screen {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, #0a1a0f 0%, #020408 50%, #0a1a10 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .phone-screen::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(16,185,129,0.02) 3px,
+        rgba(16,185,129,0.02) 4px
+      );
+      pointer-events: none;
+    }
+
+    .phone-play {
+      width: 56px; height: 56px;
+      background: rgba(16,185,129,0.2);
+      border: 1.5px solid rgba(16,185,129,0.5);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--color-emerald);
+      font-size: 1.2rem;
+      padding-left: 3px;
+      animation: pulse-ring 2.5s ease-out infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+      70% { box-shadow: 0 0 0 18px rgba(16,185,129,0); }
+      100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+    }
+
+    .phone-metric {
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.25);
+      border-radius: 10px;
+      padding: 0.5rem 0.9rem;
+      text-align: center;
+    }
+
+    .phone-metric strong {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--color-emerald-l);
+    }
+
+    .phone-metric span {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* Floating badges around phone */
+    .float-badge {
+      position: absolute;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      padding: 0.6rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .float-badge i { color: var(--color-emerald); }
+
+    .float-badge-1 { top: 15%; right: -60px; animation: float-b1 3.5s ease-in-out infinite; }
+    .float-badge-2 { bottom: 22%; left: -70px; animation: float-b2 4s ease-in-out infinite; }
+
+    @keyframes float-b1 {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-10px) rotate(1deg); }
+    }
+
+    @keyframes float-b2 {
+      0%, 100% { transform: translateY(0) rotate(1deg); }
+      50% { transform: translateY(10px) rotate(-2deg); }
+    }
+
+    /* ═══════════════════════════════════════════════
+       PORTFOLIO SECTION — FORMAT 9:16
+    ═══════════════════════════════════════════════ */
+    #portfolio {
+      background: var(--color-bg-2);
+    }
+
+    /* Filter tabs */
+    .filter-tabs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .filter-tab {
+      padding: 0.45rem 1.1rem;
+      border-radius: 100px;
+      font-size: 0.83rem;
+      font-weight: 600;
+      background: transparent;
+      color: var(--color-text-muted);
+      border: 1px solid var(--color-border);
+      transition: var(--transition-fast);
+    }
+
+    .filter-tab:hover,
+    .filter-tab.active {
+      background: rgba(16,185,129,0.12);
+      border-color: var(--color-border-em);
+      color: var(--color-emerald-l);
+    }
+
+    /* Grid 9:16 */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1rem;
+    }
+
+    /* VIDEO CARD — Coeur du format vertical */
+    .video-card {
+      aspect-ratio: 9 / 16;
+      border-radius: 1.1rem;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      border: 1px solid var(--color-border);
+      transition: var(--transition);
+      background: var(--color-surface);
+    }
+
+    .video-card:hover {
+      transform: scale(1.04) translateY(-6px);
+      border-color: rgba(16,185,129,0.3);
+      box-shadow:
+        0 0 30px rgba(16,185,129,0.15),
+        0 20px 50px rgba(0,0,0,0.5);
+      z-index: 5;
+    }
+
+    /* Card inner background */
+    .video-card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.5s ease;
+    }
+
+    .video-card:hover .video-card-bg {
+      transform: scale(1.08);
+    }
+
+    /* Gradient overlays */
+    .video-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 55%);
+      transition: var(--transition);
+    }
+
+    .video-card:hover .video-card-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.25) 60%);
+    }
+
+    /* Platform badge top */
+    .video-card-platform {
+      position: absolute;
+      top: 12px; left: 12px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.3rem 0.65rem;
+      border-radius: 100px;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.06em;
+    }
+
+    /* View count */
+    .video-card-views {
+      position: absolute;
+      top: 12px; right: 12px;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      padding: 0.28rem 0.6rem;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* Play button center */
+    .video-card-play {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .video-card:hover .video-card-play { opacity: 1; }
+
+    .play-btn-inner {
+      width: 46px; height: 46px;
+      background: rgba(16,185,129,0.25);
+      border: 1.5px solid rgba(16,185,129,0.6);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--color-emerald-l);
+      font-size: 1rem;
+      padding-left: 2px;
+      backdrop-filter: blur(6px);
+    }
+
+    /* Card bottom info */
+    .video-card-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1rem 0.9rem;
+      transform: translateY(8px);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .video-card:hover .video-card-info {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .video-card-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 0.3rem;
+    }
+
+    .video-card-cat {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--color-emerald);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* Bottom portfolio CTA */
+    .portfolio-cta {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    /* ═══════════════════════════════════════════════
+       PROCESS SECTION
+    ═══════════════════════════════════════════════ */
+    #process {
+      background: var(--color-bg);
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    /* Connector line */
+    .process-grid::before {
+      content: '';
+      position: absolute;
+      top: 2.5rem;
+      left: calc(12.5% + 1.5rem);
+      right: calc(12.5% + 1.5rem);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--color-emerald-d), var(--color-emerald), var(--color-emerald-d), transparent);
+      z-index: 0;
+    }
+
+    .process-card {
+      text-align: center;
+      padding: 2rem 1.25rem;
+      position: relative;
+      z-index: 1;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      transition: var(--transition);
+    }
+
+    .process-card:hover {
+      border-color: rgba(16,185,129,0.2);
+      background: rgba(16,185,129,0.04);
+      transform: translateY(-4px);
+    }
+
+    .process-num {
+      width: 48px; height: 48px;
+      background: rgba(16,185,129,0.1);
+      border: 1px solid var(--color-border-em);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--color-emerald);
+      margin: 0 auto 1.25rem;
+      position: relative;
+      background: var(--color-bg-2);
+    }
+
+    .process-icon {
+      font-size: 1.6rem;
+      color: var(--color-emerald);
+      margin-bottom: 1rem;
+    }
+
+    .process-card h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .process-card p {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+    }
+
+    /* ═══════════════════════════════════════════════
+       PRICING SECTION
+    ═══════════════════════════════════════════════ */
+    #pricing {
+      background: var(--color-bg-2);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    .price-card {
+      border-radius: var(--radius-card);
+      padding: 2rem 1.5rem;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      backdrop-filter: blur(20px);
+      position: relative;
+      transition: var(--transition);
+      overflow: hidden;
+    }
+
+    .price-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(16,185,129,0.2);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    /* Recommended card */
+    .price-card.featured {
+      border-color: var(--color-emerald);
+      background: linear-gradient(160deg,
+        rgba(16,185,129,0.1) 0%,
+        rgba(16,185,129,0.03) 100%
+      );
+      box-shadow:
+        0 0 0 1px rgba(16,185,129,0.3),
+        0 0 60px rgba(16,185,129,0.12);
+      transform: translateY(-8px);
+    }
+
+    .price-card.featured:hover {
+      transform: translateY(-14px);
+      box-shadow:
+        0 0 0 1px rgba(16,185,129,0.5),
+        0 0 80px rgba(16,185,129,0.2),
+        0 24px 70px rgba(0,0,0,0.5);
+    }
+
+    /* Featured glow background */
+    .price-card.featured::before {
+      content: '';
+      position: absolute;
+      top: -40%; left: 50%;
+      transform: translateX(-50%);
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(16,185,129,0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Recommended badge */
+    .price-badge {
+      display: inline-block;
+      padding: 0.3rem 0.9rem;
+      background: var(--color-emerald);
+      color: #000;
+      font-size: 0.72rem;
+      font-weight: 800;
+      border-radius: 100px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .price-icon {
+      width: 44px; height: 44px;
+      background: rgba(16,185,129,0.1);
+      border: 1px solid var(--color-border-em);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      color: var(--color-emerald);
+      margin-bottom: 1.25rem;
+    }
+
+    .price-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.3rem;
+    }
+
+    .price-tagline {
+      font-size: 0.83rem;
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .price-amount {
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .price-value {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--color-text);
+    }
+
+    .price-value sub {
+      font-size: 1rem;
+      vertical-align: baseline;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      margin-right: 2px;
+    }
+
+    .price-value sup {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+
+    .price-card.featured .price-value { color: var(--color-emerald-l); }
+
+    .price-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .price-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    .price-feature i {
+      color: var(--color-emerald);
+      font-size: 0.8rem;
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+    }
+
+    .price-feature.no {
+      color: var(--color-text-faint);
+      text-decoration: line-through;
+    }
+
+    .price-feature.no i {
+      color: var(--color-text-faint);
+    }
+
+    .price-cta {
+      display: block;
+      text-align: center;
+      padding: 0.85rem;
+      border-radius: var(--radius-btn);
+      font-weight: 700;
+      font-size: 0.88rem;
+      transition: var(--transition);
+    }
+
+    .price-cta-outline {
+      border: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+    }
+
+    .price-cta-outline:hover {
+      border-color: var(--color-border-em);
+      color: var(--color-emerald-l);
+      background: rgba(16,185,129,0.06);
+    }
+
+    .price-cta-solid {
+      background: var(--color-emerald);
+      color: #000;
+    }
+
+    .price-cta-solid:hover {
+      background: var(--color-emerald-l);
+      box-shadow: 0 0 30px rgba(16,185,129,0.4), 0 8px 20px rgba(0,0,0,0.3);
+      transform: translateY(-2px);
+    }
+
+    /* ═══════════════════════════════════════════════
+       CONTACT SECTION
+    ═══════════════════════════════════════════════ */
+    #contact {
+      background: var(--color-bg);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* Info side */
+    .contact-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .contact-info p {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      border-radius: 14px;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      transition: var(--transition);
+      text-decoration: none;
+      color: var(--color-text);
+    }
+
+    .contact-link:hover {
+      border-color: var(--color-border-em);
+      background: rgba(16,185,129,0.05);
+      transform: translateX(4px);
+    }
+
+    .contact-link-icon {
+      width: 38px; height: 38px;
+      background: rgba(16,185,129,0.1);
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      color: var(--color-emerald);
+      flex-shrink: 0;
+    }
+
+    .contact-link-label { font-size: 0.7rem; color: var(--color-text-faint); }
+    .contact-link-value { font-size: 0.88rem; font-weight: 600; }
+
+    /* Guarantee card */
+    .guarantee-card {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+      border-radius: 14px;
+      background: rgba(16,185,129,0.05);
+      border: 1px solid rgba(16,185,129,0.15);
+    }
+
+    .guarantee-card p {
+      font-size: 0.85rem;
+      margin: 0;
+    }
+
+    .guarantee-card strong {
+      color: var(--color-emerald-l);
+    }
+
+    /* Form */
+    .contact-form {
+      background: var(--color-surface);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 2.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text-faint);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      color: var(--color-text);
+      font-size: 0.9rem;
+      transition: var(--transition-fast);
+      outline: none;
+      width: 100%;
+    }
+
+    .form-group select option {
+      background: var(--color-bg-3);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--color-text-faint);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: rgba(16,185,129,0.5);
+      background: rgba(16,185,129,0.03);
+      box-shadow: 0 0 0 3px rgba(16,185,129,0.08);
+    }
+
+    /* Validation states */
+    .form-group input.error,
+    .form-group select.error,
+    .form-group textarea.error {
+      border-color: rgba(239, 68, 68, 0.5);
+      background: rgba(239, 68, 68, 0.04);
+    }
+
+    .form-group input.success,
+    .form-group select.success,
+    .form-group textarea.success {
+      border-color: rgba(16,185,129,0.45);
+    }
+
+    .field-error {
+      font-size: 0.74rem;
+      color: #f87171;
+      display: none;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .field-error.show { display: flex; }
+
+    .form-group textarea { resize: none; }
+
+    .form-submit {
+      width: 100%;
+      padding: 1.05rem;
+      background: var(--color-emerald);
+      color: #000;
+      font-size: 0.95rem;
+      font-weight: 800;
+      border-radius: var(--radius-btn);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: var(--transition);
+      letter-spacing: -0.01em;
+    }
+
+    .form-submit:hover {
+      background: var(--color-emerald-l);
+      box-shadow: 0 0 36px rgba(16,185,129,0.45), 0 8px 24px rgba(0,0,0,0.35);
+      transform: translateY(-2px);
+    }
+
+    .form-submit:active { transform: translateY(0); }
+
+    /* Success message */
+    .form-success {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem;
+      gap: 1rem;
+    }
+
+    .form-success.show { display: flex; }
+
+    .success-icon {
+      width: 72px; height: 72px;
+      background: rgba(16,185,129,0.1);
+      border: 2px solid var(--color-emerald);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      color: var(--color-emerald);
+      animation: pop-in 0.4s ease;
+    }
+
+    @keyframes pop-in {
+      0% { transform: scale(0.5); opacity: 0; }
+      80% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .form-success h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    .form-success p {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      max-width: 280px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════ */
+    #footer {
+      background: var(--color-bg-3);
+      border-top: 1px solid var(--color-border);
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      margin-top: 1rem;
+      max-width: 240px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 0.65rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-btn {
+      width: 36px; height: 36px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+      transition: var(--transition-fast);
+    }
+
+    .social-btn:hover {
+      background: rgba(16,185,129,0.1);
+      border-color: rgba(16,185,129,0.3);
+      color: var(--color-emerald);
+    }
+
+    .footer-col h4 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-faint);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .footer-col ul li a {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      transition: var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--color-emerald-l);
+      padding-left: 4px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--color-border);
+      padding-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-bottom p {
+      font-size: 0.8rem;
+      color: var(--color-text-faint);
+    }
+
+    .footer-bottom a {
+      color: var(--color-text-faint);
+      transition: color 0.2s;
+    }
+
+    .footer-bottom a:hover { color: var(--color-emerald); }
+
+    /* ═══════════════════════════════════════════════
+       SCROLL TO TOP
+    ═══════════════════════════════════════════════ */
+    #scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 44px; height: 44px;
+      background: var(--color-emerald);
+      color: #000;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 900;
+      border: none;
+      cursor: pointer;
+    }
+
+    #scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #scroll-top:hover {
+      background: var(--color-emerald-l);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(16,185,129,0.5);
+    }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE — TABLET
+    ═══════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 3rem;
+      }
+
+      .hero-eyebrow,
+      .hero-cta { justify-content: center; }
+
+      .hero-desc { margin-inline: auto; }
+
+      .hero-stats { justify-content: center; }
+
+      .hero-visual { order: -1; }
+
+      .portfolio-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .process-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .process-grid::before { display: none; }
+
+      .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .price-card.featured { transform: none; }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE — MOBILE
+    ═══════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      :root {
+        --section-pad: clamp(4rem, 8vw, 6rem);
+      }
+
+      .nav-links,
+      .nav-cta { display: none; }
+
+      .hamburger { display: flex; }
+
+      .hero-title { font-size: clamp(2.5rem, 8vw, 3.5rem); }
+
+      /* Mobile: 2 colonnes pour les vidéos verticales — parfait pour le format */
+      .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+      }
+
+      /* Sur mobile, les vidéos prennent plus de place */
+      .video-card { border-radius: 0.9rem; }
+
+      /* Toujours afficher info sur mobile */
+      .video-card-info {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .process-grid { grid-template-columns: 1fr; }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 380px;
+        margin-inline: auto;
+      }
+
+      .price-card.featured { transform: none; }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      .contact-form { padding: 1.5rem; }
+
+      .hero-stats {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .phone-frame { width: 180px; }
+
+      .float-badge-1 { display: none; }
+      .float-badge-2 { display: none; }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      #scroll-top { bottom: 1.25rem; right: 1.25rem; }
+    }
+
+    @media (max-width: 480px) {
+      .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════
+       ANIMATIONS PERSONNALISÉES
+    ═══════════════════════════════════════════════ */
+    @keyframes slide-up {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .animate-slide-up {
+      animation: slide-up 0.7s ease forwards;
+    }
+
+    .animate-delay-1 { animation-delay: 0.1s; }
+    .animate-delay-2 { animation-delay: 0.2s; }
+    .animate-delay-3 { animation-delay: 0.3s; }
+    .animate-delay-4 { animation-delay: 0.4s; }
+  </style>
 </head>
+
 <body>
 
-    <!-- Background Effects -->
-    <div class="bg-effects">
-        <div class="bg-orb bg-orb-1"></div>
-        <div class="bg-orb bg-orb-2"></div>
-        <div class="bg-orb bg-orb-3"></div>
+  <!-- ═══════════════════════════════════════════════
+       HEADER — Navigation fixe glassmorphism
+  ═══════════════════════════════════════════════ -->
+  <header id="header">
+    <div class="container">
+      <nav class="nav-inner">
+        <!-- Logo -->
+        <a href="#" class="logo" aria-label="Clarity Visuals - Accueil">
+          <div class="logo-icon">
+            <i class="fa-solid fa-play"></i>
+          </div>
+          Clarity <span>Visuals</span>
+        </a>
+
+        <!-- Desktop links -->
+        <ul class="nav-links" role="navigation" aria-label="Navigation principale">
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#process">Processus</a></li>
+          <li><a href="#pricing">Tarifs</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <!-- Desktop CTA -->
+        <a href="#contact" class="btn-primary nav-cta">
+          <i class="fa-solid fa-bolt"></i>
+          <span>Démarrer</span>
+        </a>
+
+        <!-- Mobile hamburger -->
+        <button
+          class="hamburger"
+          id="hamburger"
+          aria-label="Ouvrir le menu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
     </div>
-    <div class="bg-grid"></div>
-    <div class="particles" id="particles"></div>
+  </header>
 
-    <!-- ============ HEADER ============ -->
-    <header class="header" id="header">
-        <div class="container">
-            <div class="header-inner">
-                <a href="#" class="logo">
-                    <div class="logo-icon">BKR</div>
-                    <div class="logo-text">The SMC <span>GOAT</span></div>
-                </a>
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Menu mobile" role="navigation">
+    <a href="#portfolio" class="mobile-link">Portfolio</a>
+    <a href="#process" class="mobile-link">Processus</a>
+    <a href="#pricing" class="mobile-link">Tarifs</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+    <a href="#contact" class="btn-hero" style="margin-top:1rem;">
+      <i class="fa-solid fa-bolt"></i> Démarrer un projet
+    </a>
+  </nav>
 
-                <nav class="nav" id="mainNav">
-                    <a href="#accueil" class="active">Accueil</a>
-                    <a href="#cours">Cours</a>
-                    <a href="#faq">FAQ</a>
-                    <a href="#blog">Blog</a>
-                    <a href="#contact">Contact</a>
-                </nav>
+  <!-- ═══════════════════════════════════════════════
+       HERO SECTION
+  ═══════════════════════════════════════════════ -->
+  <section id="hero" class="section">
+    <div class="grid-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
 
-                <div class="header-right">
-                    <a href="#" class="btn btn-outline">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                        Se Connecter
-                    </a>
-                    <div class="mobile-toggle" id="mobileToggle">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
+    <div class="container">
+      <div class="hero-inner">
+
+        <!-- Texte gauche -->
+        <div class="hero-text">
+          <div class="hero-eyebrow animate-slide-up">
+            <i class="fa-solid fa-circle-dot fa-beat" style="color:var(--color-emerald);font-size:0.7rem;"></i>
+            Agence de montage #1 Format Vertical
+          </div>
+
+          <h1 class="hero-title">
+            <span class="line animate-slide-up" style="opacity:0;animation-delay:0.1s;">
+              Votre contenu
+            </span>
+            <span class="line animate-slide-up" style="opacity:0;animation-delay:0.2s;">
+              mérite d'être
+            </span>
+            <span class="line line-em animate-slide-up" style="opacity:0;animation-delay:0.3s;">
+              <span id="typing-text"></span><span class="typing-cursor"></span>
+            </span>
+          </h1>
+
+          <p class="hero-desc animate-slide-up" style="opacity:0;animation-delay:0.4s;">
+            Le format <strong>9:16</strong> domine les algorithmes.
+            Nous créons des Reels, TikToks et Shorts qui
+            <strong>captivent, convertissent</strong> et font
+            exploser votre reach organiquement.
+          </p>
+
+          <div class="hero-cta animate-slide-up" style="opacity:0;animation-delay:0.5s;">
+            <a href="#contact" class="btn-hero">
+              <i class="fa-solid fa-bolt"></i>
+              Démarrer un projet
+            </a>
+            <a href="#portfolio" class="btn-secondary">
+              <i class="fa-solid fa-play"></i>
+              Voir le portfolio
+            </a>
+          </div>
+
+          <!-- Stats -->
+          <div class="hero-stats animate-slide-up" style="opacity:0;animation-delay:0.6s;">
+            <div class="stat">
+              <div class="stat-value">12M+</div>
+              <div class="stat-label">Vues générées</div>
             </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+              <div class="stat-value">340+</div>
+              <div class="stat-label">Projets livrés</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+              <div class="stat-value">48h</div>
+              <div class="stat-label">Délai livraison</div>
+            </div>
+          </div>
         </div>
-    </header>
 
-    <!-- ============ MAIN CONTENT ============ -->
-    <main class="main-content" id="accueil">
-        <div class="container">
-            <div class="two-col-layout">
-
-                <!-- ============ LEFT COLUMN ============ -->
-                <div class="col-left">
-
-                    <!-- HERO -->
-                    <section class="hero fade-in">
-                        <div class="hero-badge">
-                            <span class="dot"></span>
-                            Inscriptions ouvertes — Rentrée 2025
-                        </div>
-                        <h1>
-                            Maîtrise les Marchés,<br>
-                            <span class="gradient-text">Maîtrise Ta Richesse</span>
-                        </h1>
-                        <p>Stratégies de trading éprouvées et mentorat d'experts pour passer de novice à trader rentable en 90 jours. Rejoins plus de 5 000 étudiants qui transforment leur avenir financier.</p>
-                        <div class="hero-btns">
-                            <a href="#cours" class="btn btn-outline btn-lg">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                                Découvrir les Programmes
-                            </a>
-                            <a href="#contact" class="btn btn-solid btn-lg">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                                Réserver une Consultation
-                            </a>
-                        </div>
-                    </section>
-
-                    <!-- STATS -->
-                    <section class="stats-section fade-in">
-                        <div class="stats-grid">
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                                </div>
-                                <div class="stat-number count-up" data-target="5000">0</div>
-                                <div class="stat-label">Étudiants Actifs</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-                                </div>
-                                <div class="stat-number"><span class="count-up" data-target="45">0</span>%</div>
-                                <div class="stat-label">Retour Étudiant Moyen</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                                </div>
-                                <div class="stat-number count-up" data-target="8">0</div>
-                                <div class="stat-label">Cours Proposés</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                                </div>
-                                <div class="stat-number"><span class="count-up" data-target="94">0</span>%</div>
-                                <div class="stat-label">Taux de Réussite</div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- WHY US SECTION -->
-                    <section class="why-section fade-in-left">
-                        <h2 class="section-title">
-                            Pourquoi <span class="highlight">ProTrader</span> Academy ?
-                        </h2>
-                        <p class="section-subtitle">Nous ne vendons pas du rêve — nous enseignons des compétences mesurables qui transforment votre relation avec les marchés financiers.</p>
-                        <div class="why-content">
-                            <div>
-                                <ul class="checklist">
-                                    <li>
-                                        <span class="check-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                                        Stratégies du monde réel testées sur les marchés
-                                    </li>
-                                    <li>
-                                        <span class="check-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                                        Guidance personnalisée de traders à succès
-                                    </li>
-                                    <li>
-                                        <span class="check-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                                        Communauté privée d'entraide 24/7
-                                    </li>
-                                    <li>
-                                        <span class="check-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                                        Sessions de trading en direct chaque semaine
-                                    </li>
-                                    <li>
-                                        <span class="check-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                                        Accès à vie au contenu et mises à jour
-                                    </li>
-                                    <li>
-                                        <span class="check-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                                        Certificat reconnu après complétion
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="perf-card fade-in-right">
-                                <div class="perf-header">
-                                    <span class="perf-label">Retour Étudiant Moyen</span>
-                                    <span class="perf-badge">▲ En hausse</span>
-                                </div>
-                                <div class="perf-value"><span>+</span>45<span>%</span></div>
-                                <div class="perf-chart">
-                                    <svg class="chart-svg" viewBox="0 0 400 120" preserveAspectRatio="none">
-                                        <defs>
-                                            <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                                                <stop offset="0%" stop-color="rgba(26, 42, 90, 0.4)"/>
-                                                <stop offset="100%" stop-color="rgba(26, 42, 90, 0)"/>
-                                            </linearGradient>
-                                            <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
-                                                <stop offset="0%" stop-color="#1A2A5A"/>
-                                                <stop offset="100%" stop-color="#4a7aff"/>
-                                            </linearGradient>
-                                        </defs>
-                                        <path d="M0,100 Q30,90 60,85 T120,70 T180,55 T240,45 T300,25 T360,20 T400,10" 
-                                              fill="none" stroke="url(#lineGrad)" stroke-width="2.5" stroke-linecap="round"/>
-                                        <path d="M0,100 Q30,90 60,85 T120,70 T180,55 T240,45 T300,25 T360,20 T400,10 V120 H0 Z" 
-                                              fill="url(#chartGrad)"/>
-                                        <circle cx="400" cy="10" r="4" fill="#4a7aff">
-                                            <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite"/>
-                                            <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
-                                        </circle>
-                                    </svg>
-                                </div>
-                                <div class="perf-stats-row">
-                                    <div class="perf-mini-stat">
-                                        <div class="mini-label">Rendement annuel</div>
-                                        <div class="mini-value" style="color: #4ade80;">+45%</div>
-                                    </div>
-                                    <div class="perf-mini-stat">
-                                        <div class="mini-label">Win Rate</div>
-                                        <div class="mini-value">78%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-
-                <!-- ============ RIGHT COLUMN ============ -->
-                <div class="col-right" id="cours">
-
-                    <!-- COURSES -->
-                    <section class="courses-section fade-in-right">
-                        <h2 class="section-title">
-                            Cours <span class="highlight">Premium</span>
-                        </h2>
-                        <p class="section-subtitle">Programmes structurés, conçus par des traders professionnels pour des résultats concrets.</p>
-
-                        <div class="courses-grid">
-                            <!-- Course 1 -->
-                            <div class="course-card">
-                                <div class="course-top">
-                                    <div class="course-icon-wrap">
-                                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                                    </div>
-                                    <div class="course-price-tag">
-                                        <span class="old-price">497 €</span>
-                                        <span class="price">297 €</span>
-                                    </div>
-                                </div>
-                                <h3 class="course-title">Forex Fundamentals</h3>
-                                <p class="course-desc">Maîtrisez les fondamentaux du marché des changes. Des paires majeures aux stratégies d'analyse technique et fondamentale.</p>
-                                <div class="course-features">
-                                    <span class="course-feature-tag">12 Modules</span>
-                                    <span class="course-feature-tag">Débutant</span>
-                                    <span class="course-feature-tag">Certificat</span>
-                                    <span class="course-feature-tag">Support 24/7</span>
-                                </div>
-                                <div class="course-bottom">
-                                    <div class="course-meta">
-                                        <span class="course-meta-item">
-                                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                            40h de contenu
-                                        </span>
-                                        <span class="course-meta-item">
-                                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-                                            2.1k inscrits
-                                        </span>
-                                    </div>
-                                    <a href="#" class="btn btn-outline">S'inscrire Maintenant</a>
-                                </div>
-                            </div>
-
-                            <!-- Course 2 -->
-                            <div class="course-card">
-                                <div class="course-top">
-                                    <div class="course-icon-wrap">
-                                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1L1 7l11 6 9-4.91V17"/><path d="M5 10v6.5c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5V10"/></svg>
-                                    </div>
-                                    <div class="course-price-tag">
-                                        <span class="old-price">597 €</span>
-                                        <span class="price">397 €</span>
-                                    </div>
-                                </div>
-                                <h3 class="course-title">Crypto Trading Pro</h3>
-                                <p class="course-desc">Stratégies avancées pour le marché des cryptomonnaies. DeFi, trading algorithmique, gestion de risque et psychologie du trader.</p>
-                                <div class="course-features">
-                                    <span class="course-feature-tag">18 Modules</span>
-                                    <span class="course-feature-tag">Avancé</span>
-                                    <span class="course-feature-tag">Live Trading</span>
-                                    <span class="course-feature-tag">Mentorat</span>
-                                </div>
-                                <div class="course-bottom">
-                                    <div class="course-meta">
-                                        <span class="course-meta-item">
-                                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                            65h de contenu
-                                        </span>
-                                        <span class="course-meta-item">
-                                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-                                            1.8k inscrits
-                                        </span>
-                                    </div>
-                                    <a href="#" class="btn btn-outline">S'inscrire Maintenant</a>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- TESTIMONIALS -->
-                    <section class="testimonials-section fade-in-right">
-                        <h2 class="section-title">
-                            Fait confiance par des <span class="highlight">milliers</span> de traders
-                        </h2>
-
-                        <div class="testimonials-grid">
-                            <div class="testimonial-card">
-                                <div class="testimonial-stars">
-                                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                </div>
-                                <p class="testimonial-text">"ProTrader Academy a complètement transformé mon approche du trading. En 3 mois, j'ai quadruplé mon capital initial grâce aux stratégies enseignées."</p>
-                                <div class="testimonial-author">
-                                    <div class="testimonial-avatar">MJ</div>
-                                    <div>
-                                        <div class="testimonial-name">Marcus Johnson</div>
-                                        <div class="testimonial-role">Trader à plein temps</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="testimonial-card">
-                                <div class="testimonial-stars">
-                                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                </div>
-                                <p class="testimonial-text">"Le mentorat personnalisé fait toute la différence. L'équipe est toujours disponible et les sessions de trading en direct sont incroyablement formatrices."</p>
-                                <div class="testimonial-author">
-                                    <div class="testimonial-avatar">SL</div>
-                                    <div>
-                                        <div class="testimonial-name">Sophie Laurent</div>
-                                        <div class="testimonial-role">Investisseuse indépendante</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="testimonial-card">
-                                <div class="testimonial-stars">
-                                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                </div>
-                                <p class="testimonial-text">"Après avoir essayé plusieurs formations, ProTrader est celle qui m'a réellement permis de devenir rentable. Le contenu est concret et applicable immédiatement."</p>
-                                <div class="testimonial-author">
-                                    <div class="testimonial-avatar">KD</div>
-                                    <div>
-                                        <div class="testimonial-name">Karim Dubois</div>
-                                        <div class="testimonial-role">Analyste financier & trader</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
+        <!-- Visual droit — Phone mockup -->
+        <div class="hero-visual">
+          <div class="phone-wrapper">
+            <!-- Floating badges -->
+            <div class="float-badge float-badge-1">
+              <i class="fa-solid fa-arrow-trend-up"></i>
+              +2.4M vues cette semaine
+            </div>
+            <div class="float-badge float-badge-2">
+              <i class="fa-brands fa-tiktok"></i>
+              Viral en 24h ⚡
             </div>
 
-            <!-- ============ FAQ (Full Width) ============ -->
-            <section class="faq-section fade-in" id="faq">
-                <div class="section-divider"></div>
-                <h2 class="section-title">
-                    Foire Aux <span class="highlight">Questions</span>
-                </h2>
-                <div class="faq-grid">
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="toggleFaq(this)">
-                            <span>Ai-je besoin d'une expérience préalable en trading ?</span>
-                            <span class="faq-toggle">
-                                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                            </span>
-                        </div>
-                        <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                Non, absolument pas ! Notre cours "Forex Fundamentals" est conçu spécialement pour les débutants. Nous vous guidons pas à pas, des concepts de base jusqu'aux stratégies avancées. Chaque module est structuré progressivement pour assurer une compréhension solide avant de passer au suivant.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="toggleFaq(this)">
-                            <span>Combien de temps faut-il pour voir des résultats ?</span>
-                            <span class="faq-toggle">
-                                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                            </span>
-                        </div>
-                        <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                La plupart de nos étudiants commencent à voir des améliorations significatives dans leur trading entre 30 et 90 jours. Cependant, les résultats dépendent de votre engagement, du temps consacré à l'apprentissage et à la pratique. Notre programme de 90 jours est conçu pour optimiser votre courbe d'apprentissage.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="toggleFaq(this)">
-                            <span>Y a-t-il une garantie de remboursement ?</span>
-                            <span class="faq-toggle">
-                                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                            </span>
-                        </div>
-                        <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                Oui ! Nous offrons une garantie satisfait ou remboursé de 30 jours. Si vous n'êtes pas pleinement satisfait de la qualité de notre formation, nous vous remboursons intégralement, sans poser de questions. Votre satisfaction et votre progression sont notre priorité absolue.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="toggleFaq(this)">
-                            <span>Quel capital minimum est recommandé pour commencer le trading ?</span>
-                            <span class="faq-toggle">
-                                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                            </span>
-                        </div>
-                        <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                Nous recommandons de commencer avec un compte démo pendant votre apprentissage. Pour le trading réel, un capital de départ de 500 € à 1 000 € est conseillé, mais vous pouvez commencer avec moins. L'important est de maîtriser la gestion du risque avant d'engager des fonds importants.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-question" onclick="toggleFaq(this)">
-                            <span>Les cours sont-ils accessibles à vie ?</span>
-                            <span class="faq-toggle">
-                                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                            </span>
-                        </div>
-                        <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                Absolument ! Une fois inscrit, vous bénéficiez d'un accès à vie au contenu du cours, y compris toutes les mises à jour futures. Vous pouvez revoir les modules autant de fois que vous le souhaitez, à votre propre rythme. L'accès à la communauté privée et aux sessions live est également inclus sans frais supplémentaires.
-                            </div>
-                        </div>
-                    </div>
+            <!-- Phone frame -->
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <div class="phone-play">
+                  <i class="fa-solid fa-play"></i>
                 </div>
-            </section>
-
-            <!-- ============ CONTACT SECTION ============ -->
-            <section class="contact-section fade-in" id="contact">
-                <div class="section-divider"></div>
-                <h2 class="section-title">
-                    Contactez-<span class="highlight">nous</span>
-                </h2>
-
-                <div class="contact-layout">
-                    <!-- Contact Info -->
-                    <div class="contact-info">
-                        <div class="contact-info-item">
-                            <div class="contact-info-icon">
-                                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                            </div>
-                            <div>
-                                <div class="contact-info-label">Email</div>
-                                <div class="contact-info-value">contact@protrader-academy.com</div>
-                            </div>
-                        </div>
-                        <div class="contact-info-item">
-                            <div class="contact-info-icon">
-                                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                            </div>
-                            <div>
-                                <div class="contact-info-label">Téléphone</div>
-                                <div class="contact-info-value">+33 1 23 45 67 89</div>
-                            </div>
-                        </div>
-                        <div class="contact-info-item">
-                            <div class="contact-info-icon">
-                                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            </div>
-                            <div>
-                                <div class="contact-info-label">Adresse</div>
-                                <div class="contact-info-value">42 Avenue des Champs-Élysées<br>75008 Paris, France</div>
-                            </div>
-                        </div>
-
-                        <div class="contact-social">
-                            <a href="#" class="social-icon" title="Twitter / X">
-                                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                            </a>
-                            <a href="#" class="social-icon" title="LinkedIn">
-                                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                            </a>
-                            <a href="#" class="social-icon" title="YouTube">
-                                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                            </a>
-                            <a href="#" class="social-icon" title="Instagram">
-                                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-                            </a>
-                            <a href="#" class="social-icon" title="Telegram">
-                                <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Contact Form -->
-                    <div class="contact-form-card">
-                        <h3 class="form-title">Envoyez-nous un message</h3>
-                        <form id="contactForm" onsubmit="handleSubmit(event)">
-                            <div class="form-group">
-                                <label class="form-label" for="name">Nom Complet</label>
-                                <input type="text" id="name" class="form-input" placeholder="Jean Dupont" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="email">Email</label>
-                                <input type="email" id="email" class="form-input" placeholder="jean@exemple.com" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="message">Message</label>
-                                <textarea id="message" class="form-input" placeholder="Décrivez votre question ou demande..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-solid btn-lg form-submit">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                                Envoyer le Message
-                            </button>
-                        </form>
-                    </div>
+                <div class="phone-metric">
+                  <strong>4.2M</strong>
+                  <span>vues • 48h</span>
                 </div>
-            </section>
+              </div>
+            </div>
+          </div>
         </div>
-    </main>
 
-    <!-- ============ FOOTER ============ -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-main">
-                <div class="footer-grid">
-                    <div class="footer-brand">
-                        <a href="#" class="logo">
-                            <div class="logo-icon">PT</div>
-                            <div class="logo-text">ProTrader <span>Academy</span></div>
-                        </a>
-                        <p>Maîtrise les marchés, maîtrise ta richesse. La première académie de trading francophone qui transforme les débutants en traders rentables.</p>
-                        <div class="contact-social">
-                            <a href="#" class="social-icon">
-                                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                            </a>
-                            <a href="#" class="social-icon">
-                                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                            </a>
-                            <a href="#" class="social-icon">
-                                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                            </a>
-                        </div>
-                    </div>
+      </div>
+    </div>
+  </section>
 
-                    <div>
-                        <h4 class="footer-col-title">Liens Rapides</h4>
-                        <ul class="footer-links">
-                            <li><a href="#accueil">Accueil</a></li>
-                            <li><a href="#cours">Nos Cours</a></li>
-                            <li><a href="#faq">FAQ</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                            <li><a href="#">À Propos</a></li>
-                        </ul>
-                    </div>
+  <!-- ═══════════════════════════════════════════════
+       PORTFOLIO — Grille vidéos format 9:16
+  ═══════════════════════════════════════════════ -->
+  <section id="portfolio" class="section">
+    <div class="grid-bg"></div>
+    <div class="container" style="position:relative;z-index:2;">
 
-                    <div>
-                        <h4 class="footer-col-title">Ressources</h4>
-                        <ul class="footer-links">
-                            <li><a href="#">Blog Trading</a></li>
-                            <li><a href="#">Glossaire</a></li>
-                            <li><a href="#">Webinaires Gratuits</a></li>
-                            <li><a href="#">Outils de Trading</a></li>
-                            <li><a href="#">Calendrier Économique</a></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h4 class="footer-col-title">Légal</h4>
-                        <ul class="footer-links">
-                            <li><a href="#">Conditions d'Utilisation</a></li>
-                            <li><a href="#">Politique de Confidentialité</a></li>
-                            <li><a href="#">Politique de Remboursement</a></li>
-                            <li><a href="#">Mentions Légales</a></li>
-                            <li><a href="#">CGV</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <div class="footer-bottom-inner">
-                    <div class="footer-bottom-row">
-                        <span class="footer-copyright">© 2025 ProTrader Academy. Tous droits réservés.</span>
-                        <div class="footer-legal-links">
-                            <a href="#">Conditions</a>
-                            <a href="#">Confidentialité</a>
-                            <a href="#">Cookies</a>
-                        </div>
-                    </div>
-                    <div class="footer-disclaimer">
-                        <strong>⚠️ Avertissement sur les risques :</strong> Le trading sur les marchés financiers comporte des risques significatifs de perte en capital. Les performances passées ne garantissent pas les résultats futurs. Les contenus éducatifs fournis par ProTrader Academy ne constituent pas des conseils en investissement. Il est recommandé de ne trader qu'avec des fonds que vous pouvez vous permettre de perdre. Consultez un conseiller financier professionnel avant de prendre toute décision d'investissement.
-                    </div>
-                </div>
-            </div>
+      <!-- Header -->
+      <div class="section-header" data-aos="fade-up">
+        <div class="badge">
+          <span class="dot"></span>
+          Vertical Showcase
         </div>
-    </footer>
+        <h2 class="section-title">
+          Notre <span>Portfolio</span>
+        </h2>
+        <p class="section-subtitle">
+          Chaque pixel est pensé pour le format vertical.
+          Des contenus qui arrêtent le scroll et génèrent
+          de l'engagement réel.
+        </p>
+        <div class="glow-line" style="margin-top:1.5rem;"></div>
+      </div>
 
-    <!-- ============ JAVASCRIPT ============ -->
-    <script>
-        // ---- Particles ----
-        (function createParticles() {
-            const container = document.getElementById('particles');
-            for (let i = 0; i < 30; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.width = (Math.random() * 2 + 1) + 'px';
-                p.style.height = p.style.width;
-                p.style.animationDuration = (Math.random() * 20 + 15) + 's';
-                p.style.animationDelay = (Math.random() * 20) + 's';
-                p.style.opacity = Math.random() * 0.3 + 0.1;
-                container.appendChild(p);
-            }
-        })();
+      <!-- Filter tabs -->
+      <div class="filter-tabs" data-aos="fade-up" data-aos-delay="100">
+        <button class="filter-tab active" data-filter="all">Tous</button>
+        <button class="filter-tab" data-filter="brand">Brand</button>
+        <button class="filter-tab" data-filter="coaching">Coaching</button>
+        <button class="filter-tab" data-filter="ecom">E-commerce</button>
+        <button class="filter-tab" data-filter="lifestyle">Lifestyle</button>
+      </div>
 
-        // ---- Header Scroll ----
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 50);
-        });
+      <!-- 
+        GRILLE 9:16 — 6 cartes format vertical strict
+        Chaque carte simule un écran smartphone
+      -->
+      <div class="portfolio-grid" id="portfolio-grid">
 
-        // ---- Mobile Nav Toggle ----
-        const mobileToggle = document.getElementById('mobileToggle');
-        const mainNav = document.getElementById('mainNav');
-        mobileToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('open');
-        });
-        mainNav.querySelectorAll('a').forEach(a => {
-            a.addEventListener('click', () => mainNav.classList.remove('open'));
-        });
+        <!-- Card 1 -->
+        <article class="video-card" data-category="brand" data-aos="fade-up" data-aos-delay="0">
+          <div class="video-card-bg" style="background: linear-gradient(160deg, #064e3b 0%, #022c22 50%, #0a0a0a 100%);"></div>
+          <div class="video-card-overlay"></div>
+          <div class="video-card-platform">
+            <i class="fa-brands fa-instagram"></i> Reels
+          </div>
+          <div class="video-card-views">
+            <i class="fa-solid fa-eye"></i> 4.2M
+          </div>
+          <!-- Icône centrale décorative -->
+          <div style="position:absolute;inset:0;display:grid;place-items:center;">
+            <div style="font-size:2.5rem;opacity:0.15;filter:blur(1px);">🎯</div>
+          </div>
+          <div class="video-card-play">
+            <div class="play-btn-inner">
+              <i class="fa-solid fa-play"></i>
+            </div>
+          </div>
+          <div class="video-card-info">
+            <div class="video-card-title">Brand Storytelling</div>
+            <div class="video-card-cat">Brand</div>
+          </div>
+        </article>
 
-        // ---- FAQ Toggle ----
-        function toggleFaq(el) {
-            const item = el.parentElement;
-            const answer = item.querySelector('.faq-answer');
-            const isActive = item.classList.contains('active');
+        <!-- Card 2 -->
+        <article class="video-card" data-category="coaching" data-aos="fade-up" data-aos-delay="80">
+          <div class="video-card-bg" style="background: linear-gradient(160deg, #1e1b4b 0%, #0e0b2e 50%, #0a0a0a 100%);"></div>
+          <div class="video-card-overlay"></div>
+          <div class="video-card-platform">
+            <i class="fa-brands fa-tiktok"></i> TikTok
+          </div>
+          <div class="video-card-views">
+            <i class="fa-solid fa-eye"></i> 2.8M
+          </div>
+          <div style="position:absolute;inset:0;display:grid;place-items:center;">
+            <div style="font-size:2.5rem;opacity:0.15;filter:blur(1px);">💪</div>
+          </div>
+          <div class="video-card-play">
+            <div class="play-btn-inner">
+              <i class="fa-solid fa-play"></i>
+            </div>
+          </div>
+          <div class="video-card-info">
+            <div class="video-card-title">Transformation Coach</div>
+            <div class="video-card-cat">Coaching</div>
+          </div>
+        </article>
 
-            // Close all
-            document.querySelectorAll('.faq-item').forEach(fi => {
-                fi.classList.remove('active');
-                fi.querySelector('.faq-answer').style.maxHeight = null;
-            });
+        <!-- Card 3 -->
+        <article class="video-card" data-category="ecom" data-aos="fade-up" data-aos-delay="160">
+          <div class="video-card-bg" style="background: linear-gradient(160deg, #431407 0%, #270c03 50%, #0a0a0a 100%);"></div>
+          <div class="video-card-overlay"></div>
+          <div class="video-card-platform">
+            <i class="fa-brands fa-youtube"></i> Shorts
+          </div>
+          <div class="video-card-views">
+            <i class="fa-solid fa-eye"></i> 1.6M
+          </div>
+          <div style="position:absolute;inset:0;display:grid;place-items:center;">
+            <div style="font-size:2.5rem;opacity:0.15;filter:blur(1px);">🚀</div>
+          </div>
+          <div class="video-card-play">
+            <div class="play-btn-inner">
+              <i class="fa-solid fa-play"></i>
+            </div>
+          </div>
+          <div class="video-card-info">
+            <div class="video-card-title">Product Launch</div>
+            <div class="video-card-cat">E-commerce</div>
+          </div>
+        </article>
 
-            if (!isActive) {
-                item.classList.add('active');
-                answer.style.maxHeight = answer.scrollHeight + 'px';
-            }
+        <!-- Card 4 -->
+        <article class="video-card" data-category="lifestyle" data-aos="fade-up" data-aos-delay="240">
+          <div class="video-card-bg" style="background: linear-gradient(160deg, #500724 0%, #2d0314 50%, #0a0a0a 100%);"></div>
+          <div class="video-card-overlay"></div>
+          <div class="video-card-platform">
+            <i class="fa-brands fa-tiktok"></i> TikTok
+          </div>
+          <div class="video-card-views">
+            <i class="fa-solid fa-eye"></i> 890K
+          </div>
+          <div style="position:absolute;inset:0;display:grid;place-items:center;">
+            <div style="font-size:2.5rem;opacity:0.15;filter:blur(1px);">✨</div>
+          </div>
+          <div class="video-card-play">
+            <div class="play-btn-inner">
+              <i class="fa-solid fa-play"></i>
+            </div>
+          </div>
+          <div class="video-card-info">
+            <div class="video-card-title">Daily Vlog Premium</div>
+            <div class="video-card-cat">Lifestyle</div>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="video-card" data-category="brand" data-aos="fade-up" data-aos-delay="320">
+          <div class="video-card-bg" style="background: linear-gradient(160deg, #422006 0%, #261204 50%, #0a0a0a 100%);"></div>
+          <div class="video-card-overlay"></div>
+          <div class="video-card-platform">
+            <i class="fa-brands fa-instagram"></i> Reels
+          </div>
+          <div class="video-card-views">
+            <i class="fa-solid fa-eye"></i> 3.1M
+          </div>
+          <div style="position:absolute;inset:0;display:grid;place-items:center;">
+            <div style="font-size:2.5rem;opacity:0.15;filter:blur(1px);">👑</div>
+          </div>
+          <div class="video-card-play">
+            <div class="play-btn-inner">
+              <i class="fa-solid fa-play"></i>
+            </div>
+          </div>
+          <div class="video-card-info">
+            <div class="video-card-title">Marque Luxe</div>
+            <div class="video-card-cat">Brand</div>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="video-card" data-category="ecom" data-aos="fade-up" data-aos-delay="400">
+          <div class="video-card-bg" style="background: linear-gradient(160deg, #0c1a3a 0%, #060e22 50%, #0a0a0a 100%);"></div>
+          <div class="video-card-overlay"></div>
+          <div class="video-card-platform">
+            <i class="fa-brands fa-youtube"></i> Shorts
+          </div>
+          <div class="video-card-views">
+            <i class="fa-solid fa-eye"></i> 2.2M
+          </div>
+          <div style="position:absolute;inset:0;display:grid;place-items:center;">
+            <div style="font-size:2.5rem;opacity:0.15;filter:blur(1px);">🔥</div>
+          </div>
+          <div class="video-card-play">
+            <div class="play-btn-inner">
+              <i class="fa-solid fa-play"></i>
+            </div>
+          </div>
+          <div class="video-card-info">
+            <div class="video-card-title">Drop Streetwear</div>
+            <div class="video-card-cat">E-commerce</div>
+          </div>
+        </article>
+
+      </div><!-- /portfolio-grid -->
+
+      <!-- Portfolio CTA -->
+      <div class="portfolio-cta" data-aos="fade-up" data-aos-delay="200">
+        <a href="#contact" class="btn-secondary" style="display:inline-flex;gap:0.5rem;padding:0.85rem 2rem;">
+          <i class="fa-solid fa-eye"></i>
+          Voir tous les projets
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       PROCESS SECTION
+  ═══════════════════════════════════════════════ -->
+  <section id="process" class="section">
+    <div class="container">
+
+      <div class="section-header" data-aos="fade-up">
+        <div class="badge">
+          <span class="dot"></span>
+          Notre Processus
+        </div>
+        <h2 class="section-title">
+          Simple, <span>Rapide</span>, Efficace
+        </h2>
+        <p class="section-subtitle">
+          De vos rushes à un contenu viral, en 4 étapes
+          claires et un délai ultra-compétitif.
+        </p>
+      </div>
+
+      <div class="process-grid">
+
+        <div class="process-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="process-num">01</div>
+          <div class="process-icon">
+            <i class="fa-solid fa-comments"></i>
+          </div>
+          <h3>Brief & Stratégie</h3>
+          <p>On analyse votre audience, vos objectifs et on définit une stratégie de contenu vertical sur mesure.</p>
+        </div>
+
+        <div class="process-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="process-num">02</div>
+          <div class="process-icon">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </div>
+          <h3>Réception des Rushes</h3>
+          <p>Vous nous envoyez vos vidéos brutes, lives, ou on tourne avec vous. On prend tout en charge.</p>
+        </div>
+
+        <div class="process-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="process-num">03</div>
+          <div class="process-icon">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </div>
+          <h3>Montage & Post-Prod</h3>
+          <p>Sous-titres animés, sound design, VFX, color grading. Chaque vidéo optimisée pour l'algorithme.</p>
+        </div>
+
+        <div class="process-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="process-num">04</div>
+          <div class="process-icon">
+            <i class="fa-solid fa-rocket"></i>
+          </div>
+          <h3>Livraison & Analyse</h3>
+          <p>Livraison en 48h, révisions incluses, et suivi des performances sur 30 jours post-publication.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       PRICING SECTION — 4 offres
+  ═══════════════════════════════════════════════ -->
+  <section id="pricing" class="section">
+    <div class="grid-bg"></div>
+    <div class="container" style="position:relative;z-index:2;">
+
+      <div class="section-header" data-aos="fade-up">
+        <div class="badge">
+          <span class="dot"></span>
+          Nos Offres
+        </div>
+        <h2 class="section-title">
+          Investissez dans votre <span>Visibilité</span>
+        </h2>
+        <p class="section-subtitle">
+          Des packs transparents, sans surprise. Choisissez
+          le niveau qui correspond à votre ambition.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <!-- Pack Starter -->
+        <div class="price-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="price-icon">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <div class="price-name">Starter</div>
+          <div class="price-tagline">Pour tester & démarrer</div>
+          <div class="price-amount">
+            <div class="price-value">
+              <sub>€</sub>149<sup>/vidéo</sup>
+            </div>
+          </div>
+          <ul class="price-features">
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              1 vidéo montée
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Montage simple & dynamique
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Format 9:16 optimisé
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              1 révision incluse
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Livraison en 72h
+            </li>
+            <li class="price-feature no">
+              <i class="fa-solid fa-xmark"></i>
+              Sous-titres dynamiques
+            </li>
+            <li class="price-feature no">
+              <i class="fa-solid fa-xmark"></i>
+              Sound design
+            </li>
+          </ul>
+          <a href="#contact" class="price-cta price-cta-outline">
+            Commencer <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Pack Viral — FEATURED -->
+        <div class="price-card featured" data-aos="fade-up" data-aos-delay="100">
+          <div class="price-badge">⚡ Recommandé</div>
+          <div class="price-icon" style="background:rgba(16,185,129,0.2);border-color:rgba(16,185,129,0.5);">
+            <i class="fa-solid fa-fire"></i>
+          </div>
+          <div class="price-name" style="color:var(--color-emerald-l);">Viral</div>
+          <div class="price-tagline">Le meilleur rapport qualité/prix</div>
+          <div class="price-amount">
+            <div class="price-value">
+              <sub>€</sub>549<sup>/mois</sup>
+            </div>
+          </div>
+          <ul class="price-features">
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              <strong>5 vidéos / mois</strong>
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Sous-titres dynamiques animés
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Sound design premium
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Format 9:16 + ratios bonus
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Livraison en 48h
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              3 révisions incluses
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Dashboard performances
+            </li>
+          </ul>
+          <a href="#contact" class="price-cta price-cta-solid">
+            Devenir Viral <i class="fa-solid fa-rocket"></i>
+          </a>
+        </div>
+
+        <!-- Pack Business -->
+        <div class="price-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="price-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <div class="price-name">Business</div>
+          <div class="price-tagline">Dominez votre niche</div>
+          <div class="price-amount">
+            <div class="price-value">
+              <sub>€</sub>1299<sup>/mois</sup>
+            </div>
+          </div>
+          <ul class="price-features">
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              <strong>15 vidéos / mois</strong>
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Stratégie de contenu mensuelle
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Réutilisation de lives
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Sous-titres + Sound design
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Livraison en 24h
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Révisions illimitées
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Call stratégie mensuel
+            </li>
+          </ul>
+          <a href="#contact" class="price-cta price-cta-outline">
+            Prendre le contrôle <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Pack Elite -->
+        <div class="price-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="price-icon">
+            <i class="fa-solid fa-ghost"></i>
+          </div>
+          <div class="price-name">Elite</div>
+          <div class="price-tagline">Gestion complète & premium</div>
+          <div class="price-amount">
+            <div class="price-value">
+              <sub>€</sub>2499<sup>/mois</sup>
+            </div>
+          </div>
+          <ul class="price-features">
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              <strong>30 vidéos / mois</strong>
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Montage cinématique premium
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              VFX & transitions sur mesure
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Ghostwriting des scripts
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Livraison 24h garantie
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Manager dédié
+            </li>
+            <li class="price-feature">
+              <i class="fa-solid fa-check"></i>
+              Rapport ROI mensuel
+            </li>
+          </ul>
+          <a href="#contact" class="price-cta price-cta-outline">
+            Devenir Elite <i class="fa-solid fa-crown"></i>
+          </a>
+        </div>
+
+      </div><!-- /pricing-grid -->
+
+      <!-- Note bas de page tarifs -->
+      <p
+        style="text-align:center;margin-top:2rem;font-size:0.8rem;color:var(--color-text-faint);"
+        data-aos="fade-up" data-aos-delay="300"
+      >
+        Tous les packs incluent la propriété totale des fichiers •
+        Sans engagement longue durée • Paiement sécurisé
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       CONTACT SECTION
+  ═══════════════════════════════════════════════ -->
+  <section id="contact" class="section">
+    <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(16,185,129,0.07) 0%,transparent 70%);right:-100px;bottom:-100px;"></div>
+
+    <div class="container" style="position:relative;z-index:2;">
+
+      <div class="section-header" data-aos="fade-up">
+        <div class="badge">
+          <span class="dot"></span>
+          Parlons de votre projet
+        </div>
+        <h2 class="section-title">
+          Prêt à devenir <span>Incontournable</span> ?
+        </h2>
+        <p class="section-subtitle">
+          Décrivez votre projet. Notre équipe vous répond
+          sous 2h ouvrées avec une stratégie personnalisée.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+
+        <!-- Info latérale -->
+        <aside data-aos="fade-right" data-aos-delay="100">
+          <div class="contact-info">
+            <h3>On créé ensemble votre <span style="color:var(--color-emerald);">succès vertical</span></h3>
+            <p>
+              Que vous soyez créateur, marque ou entrepreneur,
+              notre équipe est là pour transformer votre vision
+              en contenu qui performe vraiment.
+            </p>
+          </div>
+
+          <div class="contact-links">
+            <a href="mailto:hello@clarityvisuals.fr" class="contact-link">
+              <div class="contact-link-icon">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div>
+                <div class="contact-link-label">Email</div>
+                <div class="contact-link-value">hello@clarityvisuals.fr</div>
+              </div>
+            </a>
+
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="contact-link">
+              <div class="contact-link-icon">
+                <i class="fa-brands fa-instagram"></i>
+              </div>
+              <div>
+                <div class="contact-link-label">Instagram</div>
+                <div class="contact-link-value">@clarityvisuals</div>
+              </div>
+            </a>
+
+            <a href="https://tiktok.com" target="_blank" rel="noopener" class="contact-link">
+              <div class="contact-link-icon">
+                <i class="fa-brands fa-tiktok"></i>
+              </div>
+              <div>
+                <div class="contact-link-label">TikTok</div>
+                <div class="contact-link-value">@clarityvisuals</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="guarantee-card">
+            <p>
+              <i class="fa-solid fa-shield-halved" style="color:var(--color-emerald);margin-right:0.4rem;"></i>
+              <strong>Satisfaction garantie à 100%</strong><br>
+              <span style="font-size:0.82rem;color:var(--color-text-muted);">
+                Si votre première vidéo ne vous satisfait pas,
+                on la refait gratuitement. Sans question.
+              </span>
+            </p>
+          </div>
+        </aside>
+
+        <!-- Formulaire -->
+        <div data-aos="fade-left" data-aos-delay="150">
+          <div class="contact-form">
+
+            <!-- Formulaire visible -->
+            <form id="contact-form" novalidate>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="f-name">Nom / Prénom *</label>
+                  <input
+                    type="text"
+                    id="f-name"
+                    name="name"
+                    placeholder="Jean Dupont"
+                    autocomplete="name"
+                    required
+                  />
+                  <span class="field-error" id="err-name">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Veuillez entrer votre nom
+                  </span>
+                </div>
+
+                <div class="form-group">
+                  <label for="f-email">Email *</label>
+                  <input
+                    type="email"
+                    id="f-email"
+                    name="email"
+                    placeholder="jean@email.com"
+                    autocomplete="email"
+                    required
+                  />
+                  <span class="field-error" id="err-email">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Email invalide
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="f-platform">Plateforme principale</label>
+                  <select id="f-platform" name="platform">
+                    <option value="">Choisir...</option>
+                    <option value="instagram">Instagram Reels</option>
+                    <option value="tiktok">TikTok</option>
+                    <option value="youtube">YouTube Shorts</option>
+                    <option value="multi">Multi-plateformes</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="f-budget">Pack souhaité</label>
+                  <select id="f-budget" name="budget">
+                    <option value="">Choisir...</option>
+                    <option value="starter">Pack Starter — 149€</option>
+                    <option value="viral">Pack Viral — 549€/mois</option>
+                    <option value="business">Pack Business — 1299€/mois</option>
+                    <option value="elite">Pack Elite — 2499€/mois</option>
+                    <option value="custom">Sur mesure</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="f-message">Décrivez votre projet *</label>
+                <textarea
+                  id="f-message"
+                  name="message"
+                  rows="5"
+                  placeholder="Parlez-nous de votre activité, vos objectifs, le type de contenu que vous créez..."
+                  required
+                ></textarea>
+                <span class="field-error" id="err-message">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                  Veuillez décrire votre projet (min. 20 caractères)
+                </span>
+              </div>
+
+              <button type="submit" class="form-submit">
+                <i class="fa-solid fa-paper-plane"></i>
+                Envoyer ma demande
+              </button>
+
+              <p style="text-align:center;font-size:0.75rem;color:var(--color-text-faint);margin-top:1rem;">
+                <i class="fa-solid fa-lock"></i>
+                Données sécurisées — Réponse sous 2h • Zéro spam garanti
+              </p>
+            </form>
+
+            <!-- Message de succès -->
+            <div class="form-success" id="form-success">
+              <div class="success-icon">
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <h3>Message envoyé ! 🎉</h3>
+              <p>
+                On revient vers vous dans les 2 prochaines heures
+                avec une stratégie personnalisée.
+              </p>
+              <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+                <span style="width:8px;height:8px;border-radius:50%;background:var(--color-emerald);animation:pulse-dot 2s ease infinite;"></span>
+                <span style="font-size:0.8rem;color:var(--color-emerald);">
+                  Délai moyen de réponse : 47 minutes
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════ -->
+  <footer id="footer">
+    <div class="container">
+
+      <div class="footer-top">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <div class="logo-icon">
+              <i class="fa-solid fa-play"></i>
+            </div>
+            Clarity <span>Visuals</span>
+          </a>
+          <p>
+            L'agence de référence pour les créateurs et marques
+            qui veulent dominer le format vertical. Chaque seconde compte.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="#" class="social-btn" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="#" class="social-btn" aria-label="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="#" class="social-btn" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#portfolio">Montage Reels</a></li>
+            <li><a href="#portfolio">Montage TikTok</a></li>
+            <li><a href="#portfolio">YouTube Shorts</a></li>
+            <li><a href="#portfolio">VFX & Motion</a></li>
+            <li><a href="#portfolio">Sound Design</a></li>
+          </ul>
+        </div>
+
+        <!-- Agence -->
+        <div class="footer-col">
+          <h4>Agence</h4>
+          <ul>
+            <li><a href="#process">Notre Processus</a></li>
+            <li><a href="#pricing">Tarifs</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Case Studies</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal -->
+        <div class="footer-col">
+          <h4>Légal</h4>
+          <ul>
+            <li><a href="#">Mentions légales</a></li>
+            <li><a href="#">CGV</a></li>
+            <li><a href="#">Confidentialité</a></li>
+            <li><a href="#">Cookies</a></li>
+          </ul>
+        </div>
+
+      </div><!-- /footer-top -->
+
+      <div class="footer-bottom">
+        <p>© 2025 Clarity Visuals. Tous droits réservés.</p>
+        <p>
+          Créé avec
+          <i class="fa-solid fa-heart" style="color:var(--color-emerald);margin-inline:0.25rem;"></i>
+          pour les créateurs ambitieux
+        </p>
+        <p>
+          <a href="#">Mentions légales</a> &nbsp;·&nbsp;
+          <a href="#">CGV</a> &nbsp;·&nbsp;
+          <a href="#">Confidentialité</a>
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scroll to top button -->
+  <button id="scroll-top" aria-label="Remonter en haut">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <!-- ═══════════════════════════════════════════════
+       AOS CDN
+  ═══════════════════════════════════════════════ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+  <script>
+    /* ═══════════════════════════════════════════════════
+       INITIALISATION AOS
+    ═══════════════════════════════════════════════════ */
+    AOS.init({
+      duration: 700,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 60,
+    });
+
+    /* ═══════════════════════════════════════════════════
+       NAVBAR — Effet scroll glassmorphism
+    ═══════════════════════════════════════════════════ */
+    const header = document.getElementById('header');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    /* ═══════════════════════════════════════════════════
+       HAMBURGER MENU MOBILE
+    ═══════════════════════════════════════════════════ */
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+      // Bloquer le scroll body quand menu ouvert
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    // Fermer le menu au clic sur un lien
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* ═══════════════════════════════════════════════════
+       TYPING EFFECT — Hero headline
+    ═══════════════════════════════════════════════════ */
+    const typingEl = document.getElementById('typing-text');
+    const words = ['Viral.', 'Captivant.', 'Vertical.', 'Impactant.', 'Mémorable.'];
+    let wordIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    let typingDelay = 110;
+
+    function typeEffect() {
+      const currentWord = words[wordIdx];
+
+      if (!isDeleting) {
+        // Écriture
+        typingEl.textContent = currentWord.slice(0, charIdx + 1);
+        charIdx++;
+
+        if (charIdx === currentWord.length) {
+          // Pause en fin de mot
+          isDeleting = true;
+          typingDelay = 2200;
+        } else {
+          typingDelay = 110;
         }
+      } else {
+        // Effacement
+        typingEl.textContent = currentWord.slice(0, charIdx - 1);
+        charIdx--;
 
-        // ---- Scroll Animations ----
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, i * 100);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
-            observer.observe(el);
-        });
-
-        // ---- Count Up Animation ----
-        function animateCount(el) {
-            const target = parseInt(el.getAttribute('data-target'));
-            const duration = 2000;
-            const start = performance.now();
-
-            function update(now) {
-                const elapsed = now - start;
-                const progress = Math.min(elapsed / duration, 1);
-                // ease out
-                const eased = 1 - Math.pow(1 - progress, 3);
-                const current = Math.floor(eased * target);
-                el.textContent = current.toLocaleString('fr-FR');
-                if (progress < 1) requestAnimationFrame(update);
-                else el.textContent = target.toLocaleString('fr-FR');
-            }
-            requestAnimationFrame(update);
+        if (charIdx === 0) {
+          isDeleting = false;
+          wordIdx = (wordIdx + 1) % words.length;
+          typingDelay = 400;
+        } else {
+          typingDelay = 60;
         }
+      }
 
-        const countObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCount(entry.target);
-                    countObserver.unobserve(entry.target);
-                }
+      setTimeout(typeEffect, typingDelay);
+    }
+
+    // Démarrer l'effet après le chargement
+    setTimeout(typeEffect, 1200);
+
+    /* ═══════════════════════════════════════════════════
+       PORTFOLIO — Filtres par catégorie
+    ═══════════════════════════════════════════════════ */
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const videoCards = document.querySelectorAll('.video-card');
+
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // MAJ état actif
+        filterTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const filter = tab.dataset.filter;
+
+        videoCards.forEach(card => {
+          const category = card.dataset.category;
+
+          if (filter === 'all' || category === filter) {
+            // Afficher avec animation
+            card.style.display = '';
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.92) translateY(10px)';
+
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1) translateY(0)';
+              });
             });
-        }, { threshold: 0.5 });
+          } else {
+            // Masquer
+            card.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.92) translateY(10px)';
 
-        document.querySelectorAll('.count-up').forEach(el => countObserver.observe(el));
-
-        // ---- Form Submit ----
-        function handleSubmit(e) {
-            e.preventDefault();
-            const btn = e.target.querySelector('button[type="submit"]');
-            const original = btn.innerHTML;
-            btn.innerHTML = `
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                Message Envoyé !
-            `;
-            btn.style.background = 'linear-gradient(135deg, #166534, #22c55e)';
             setTimeout(() => {
-                btn.innerHTML = original;
-                btn.style.background = '';
-                e.target.reset();
-            }, 3000);
-        }
-
-        // ---- Active Nav on Scroll ----
-        const sections = document.querySelectorAll('section[id], main[id]');
-        const navLinks = document.querySelectorAll('.nav a');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 200;
-                if (scrollY >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
+              card.style.display = 'none';
+            }, 250);
+          }
         });
-    </script>
+      });
+    });
+
+    /* ═══════════════════════════════════════════════════
+       SCROLL TO TOP BUTTON
+    ═══════════════════════════════════════════════════ */
+    const scrollTopBtn = document.getElementById('scroll-top');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* ═══════════════════════════════════════════════════
+       SMOOTH SCROLL pour ancres internes
+    ═══════════════════════════════════════════════════ */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          const offset = 80; // hauteur header fixe
+          const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    /* ═══════════════════════════════════════════════════
+       FORMULAIRE — Validation JavaScript
+    ═══════════════════════════════════════════════════ */
+    const form = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+
+    /**
+     * Afficher une erreur sur un champ
+     */
+    function showError(field, errorId) {
+      field.classList.add('error');
+      field.classList.remove('success');
+      document.getElementById(errorId).classList.add('show');
+    }
+
+    /**
+     * Marquer un champ comme valide
+     */
+    function showSuccess(field, errorId) {
+      field.classList.remove('error');
+      field.classList.add('success');
+      document.getElementById(errorId).classList.remove('show');
+    }
+
+    /**
+     * Valider l'email avec regex
+     */
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    /**
+     * Validation en temps réel sur chaque champ
+     */
+    const nameField    = document.getElementById('f-name');
+    const emailField   = document.getElementById('f-email');
+    const messageField = document.getElementById('f-message');
+
+    nameField.addEventListener('blur', () => {
+      if (nameField.value.trim().length < 2) {
+        showError(nameField, 'err-name');
+      } else {
+        showSuccess(nameField, 'err-name');
+      }
+    });
+
+    emailField.addEventListener('blur', () => {
+      if (!isValidEmail(emailField.value.trim())) {
+        showError(emailField, 'err-email');
+      } else {
+        showSuccess(emailField, 'err-email');
+      }
+    });
+
+    messageField.addEventListener('blur', () => {
+      if (messageField.value.trim().length < 20) {
+        showError(messageField, 'err-message');
+      } else {
+        showSuccess(messageField, 'err-message');
+      }
+    });
+
+    /**
+     * Soumission du formulaire
+     */
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      let isValid = true;
+
+      // Valider nom
+      if (nameField.value.trim().length < 2) {
+        showError(nameField, 'err-name');
+        isValid = false;
+      } else {
+        showSuccess(nameField, 'err-name');
+      }
+
+      // Valider email
+      if (!isValidEmail(emailField.value.trim())) {
+        showError(emailField, 'err-email');
+        isValid = false;
+      } else {
+        showSuccess(emailField, 'err-email');
+      }
+
+      // Valider message
+      if (messageField.value.trim().length < 20) {
+        showError(messageField, 'err-message');
+        isValid = false;
+      } else {
+        showSuccess(messageField, 'err-message');
+      }
+
+      if (!isValid) {
+        // Scroll vers le premier champ en erreur
+        const firstError = form.querySelector('.error');
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          firstError.focus();
+        }
+        return;
+      }
+
+      // Animation de chargement sur le bouton
+      const submitBtn = form.querySelector('.form-submit');
+      const originalContent = submitBtn.innerHTML;
+
+      submitBtn.innerHTML = `
+        <i class="fa-solid fa-circle-notch fa-spin"></i>
+        Envoi en cours...
+      `;
+      submitBtn.disabled = true;
+
+      // Simulation envoi (remplacez par votre appel fetch/API réel)
+      setTimeout(() => {
+        form.style.display = 'none';
+        formSuccess.classList.add('show');
+
+        // Reset form pour une éventuelle réutilisation
+        form.reset();
+        form.querySelectorAll('input, textarea, select').forEach(el => {
+          el.classList.remove('success', 'error');
+        });
+
+        submitBtn.innerHTML = originalContent;
+        submitBtn.disabled = false;
+      }, 1500);
+    });
+
+    /* ═══════════════════════════════════════════════════
+       CURSOR GLOW EFFECT — desktop uniquement
+    ═══════════════════════════════════════════════════ */
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      const cursor = document.createElement('div');
+      cursor.style.cssText = `
+        position: fixed;
+        pointer-events: none;
+        z-index: 9998;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        background: radial-gradient(circle,
+          rgba(16,185,129,0.04) 0%,
+          transparent 70%
+        );
+        transform: translate(-50%, -50%);
+        transition: opacity 0.3s ease;
+        top: 0; left: 0;
+      `;
+      document.body.appendChild(cursor);
+
+      let mouseX = 0, mouseY = 0;
+      let curX = 0, curY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      // Animation fluide du cursor glow
+      function animateCursor() {
+        curX += (mouseX - curX) * 0.08;
+        curY += (mouseY - curY) * 0.08;
+        cursor.style.left = curX + 'px';
+        cursor.style.top = curY + 'px';
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+    }
+
+    /* ═══════════════════════════════════════════════════
+       INTERSECTION OBSERVER — Compteur animé des stats hero
+    ═══════════════════════════════════════════════════ */
+    function animateCounter(el, target, suffix, duration) {
+      let start = 0;
+      const startTime = performance.now();
+
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Easing ease-out
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(eased * target);
+
+        el.textContent = current + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          el.textContent = target + suffix;
+        }
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    // Observer pour déclencher les compteurs quand visibles
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const statValues = entry.target.querySelectorAll('.stat-value');
+          statValues.forEach(el => {
+            const text = el.textContent;
+
+            if (text.includes('12M')) {
+              el.textContent = '0M+';
+              animateCounter(el, 12, 'M+', 1800);
+            } else if (text.includes('340')) {
+              el.textContent = '0+';
+              animateCounter(el, 340, '+', 1800);
+            } else if (text.includes('48h')) {
+              // Pas de compteur pour "48h"
+            }
+          });
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const heroStats = document.querySelector('.hero-stats');
+    if (heroStats) statsObserver.observe(heroStats);
+
+  </script>
+
 </body>
 </html>
